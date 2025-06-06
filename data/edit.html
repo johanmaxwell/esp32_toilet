@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edit ESP32 Configuration</title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<form id="configForm" onsubmit="handleSubmit(event)">
+				<!-- Step Indicator -->
+				<div class="step-indicator">
+					<span id="stepIndicator">Step 1 of 3</span>
+				</div>
+
+				<!-- Step 1: Connection Configuration -->
+				<div class="step active" id="step-1">
+					<h3>Connection Configuration</h3>
+					<label>WiFi SSID</label>
+					<input type="text" name="wifi_ssid" required />
+					<label>WiFi Password</label>
+					<input type="text" name="wifi_password" required />
+					<label>MQTT Server</label>
+					<input type="text" name="mqtt_server" required />
+					<label>MQTT Port</label>
+					<input type="text" name="mqtt_port" required />
+					<label>MQTT User</label>
+					<input type="text" name="mqtt_user" required />
+					<label>MQTT Password</label>
+					<input type="text" name="mqtt_password" required />
+				</div>
+
+				<!-- Step 2: Device Configuration -->
+				<div class="step" id="step-2">
+					<h3>Device Configuration</h3>
+					<label>Company</label>
+					<input type="text" name="company" required />
+					<label>Gedung</label>
+					<input type="text" name="gedung" required />
+					<label>Lokasi</label>
+					<input type="text" name="lokasi" required />
+					<div>
+						<label><input type="radio" name="gender" value="pria" required /> Pria</label>
+						<label><input type="radio" name="gender" value="wanita" required /> Wanita</label>
+					</div>
+					<label>Nomor Perangkat</label>
+					<input type="text" name="nomor_perangkat" required />
+				</div>
+
+				<!-- Step 3: Monitoring Configuration -->
+				<div class="step" id="step-3">
+					<h3>Monitoring Configuration</h3>
+					<label><input type="checkbox" name="okupansi" onchange="toggleExtraInputsEdit()" /> Okupansi</label><br />
+					<label><input type="checkbox" name="pengunjung" onchange="toggleExtraInputsEdit()" /> Jumlah Pengunjung</label><br />
+					<label><input type="checkbox" name="tisu" onchange="toggleExtraInputsEdit()" /> Tisu Toilet</label><br />
+					<label><input type="checkbox" name="sabun" onchange="toggleExtraInputsEdit()" /> Sabun Cuci Tangan</label><br />
+					<label><input type="checkbox" name="bau" onchange="toggleExtraInputsEdit()" /> Bau Toilet</label><br />
+					<div id="extraInputs"></div>
+				</div>
+
+				<!-- Navigation Buttons -->
+				<div class="button-group">
+					<button type="button" onclick="prevStep()" id="backButton" style="display: none">Back</button>
+					<button type="button" onclick="nextStep()" id="nextButton">Next</button>
+					<button type="submit" id="submitButton" style="display: none">Submit</button>
+				</div>
+			</form>
+		</div>
+		<button id="viewDataBtn" onclick="location.href='/data.html'">View Saved Data</button>
+		<script src="/script.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				fetch("/currentData")
+					.then((response) => response.json())
+					.then((data) => {
+						for (const key in data) {
+							const input = document.querySelector(`[name="${key}"]`);
+							if (input) {
+								if (input.type === "checkbox") {
+									input.checked = data[key] === "on";
+									toggleExtraInputsEdit();
+								} else if (input.type === "radio") {
+									const radio = document.querySelector(`[name="${key}"][value="${data[key]}"]`);
+									if (radio) radio.checked = true;
+								} else {
+									input.value = data[key];
+								}
+							}
+						}
+					});
+			});
+		</script>
+	</body>
+</html>

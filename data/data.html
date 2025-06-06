@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Saved Configuration</title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h2>Saved Configuration</h2>
+			<div class="table-container">
+				<div id="dataTable"></div>
+			</div>
+			<div class="button-group">
+				<button onclick="clearPreferences()">Clear Preferences</button>
+				<button onclick="location.href='/edit.html'">Edit Data</button>
+				<button onclick="location.href='/index.html'">Back to Form</button><br />
+				<button class="red-button" onclick="closeServer()">Close Server</button>
+			</div>
+		</div>
+		<script>
+			fetch("/getdata")
+				.then((response) => response.text())
+				.then((data) => {
+					document.getElementById("dataTable").innerHTML = data;
+				});
+
+			function clearPreferences() {
+				fetch("/clear", { method: "POST" }).then(() => location.reload());
+			}
+
+			function closeServer() {
+				fetch("/stop", { method: "POST" });
+			}
+		</script>
+	</body>
+</html>

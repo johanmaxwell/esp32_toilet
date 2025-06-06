@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>ESP32 Configuration</title>
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<form id="configForm" onsubmit="handleSubmit(event)">
+				<!-- Step Indicator -->
+				<div class="step-indicator">
+					<span id="stepIndicator">Step 1 of 3</span>
+				</div>
+
+				<!-- Step 1: Connection Configuration -->
+				<div class="step active" id="step-1">
+					<h3>Connection Configuration</h3>
+					<input type="text" name="wifi_ssid" placeholder="WiFi SSID" required />
+					<input type="text" name="wifi_password" placeholder="WiFi Password" required />
+					<input type="text" name="mqtt_server" placeholder="MQTT Server" required />
+					<input type="text" name="mqtt_port" placeholder="MQTT Port" required />
+					<input type="text" name="mqtt_user" placeholder="MQTT User" required />
+					<input type="text" name="mqtt_password" placeholder="MQTT Password" required />
+				</div>
+
+				<!-- Step 2: Device Configuration -->
+				<div class="step" id="step-2">
+					<h3>Device Configuration</h3>
+					<input type="text" name="company" placeholder="Company" required />
+					<input type="text" name="gedung" placeholder="Gedung" required />
+					<input type="text" name="lokasi" placeholder="Lokasi" required />
+					<div>
+						<label><input type="radio" name="gender" value="pria" required /> Pria</label>
+						<label><input type="radio" name="gender" value="wanita" required /> Wanita</label>
+					</div>
+					<input type="text" name="nomor_perangkat" placeholder="Nomor Perangkat" required />
+				</div>
+
+				<!-- Step 3: Monitoring Configuration -->
+				<div class="step" id="step-3">
+					<h3>Monitoring Configuration</h3>
+					<label><input type="checkbox" name="okupansi" onchange="toggleExtraInputs()" /> Okupansi</label><br />
+					<label><input type="checkbox" name="pengunjung" onchange="toggleExtraInputs()" /> Jumlah Pengunjung</label><br />
+					<label><input type="checkbox" name="tisu" onchange="toggleExtraInputs()" /> Tisu Toilet</label><br />
+					<label><input type="checkbox" name="sabun" onchange="toggleExtraInputs()" /> Sabun Cuci Tangan</label><br />
+					<label><input type="checkbox" name="bau" onchange="toggleExtraInputs()" /> Bau Toilet</label><br />
+					<div id="extraInputs"></div>
+				</div>
+
+				<!-- Navigation Buttons -->
+				<div class="button-group">
+					<button type="button" onclick="prevStep()" id="backButton" style="display: none">Back</button>
+					<button type="button" onclick="nextStep()" id="nextButton">Next</button>
+					<button type="submit" id="submitButton" style="display: none">Submit</button>
+				</div>
+			</form>
+		</div>
+		<button id="viewDataBtn" onclick="location.href='/data.html'">View Saved Data</button>
+		<script src="/script.js"></script>
+	</body>
+</html>

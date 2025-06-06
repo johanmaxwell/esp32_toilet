@@ -1,0 +1,157 @@
+/* General Styling */
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f0f2f5;
+	margin: 0;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	width: 600px;
+	height: 80%;
+	overflow-y: auto;
+	box-sizing: border-box;
+	position: relative;
+}
+
+#viewDataBtn {
+	margin-top: 20px;
+	width: 600px;
+	padding: 12px;
+	font-size: 16px;
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#viewDataBtn:hover {
+	background-color: #218838;
+}
+
+h2,
+h3 {
+	color: #333;
+	margin-top: 0;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+	width: 100%;
+	margin: 12px 0;
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size: 16px;
+}
+
+button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.red-button {
+	background-color: red;
+}
+
+.red-button:hover {
+	background-color: rgb(251, 87, 87);
+}
+
+.step {
+	display: none;
+}
+
+.step.active {
+	display: block;
+}
+
+label {
+	display: block;
+	margin: 8px 0;
+	font-size: 15px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	margin-right: 8px;
+}
+
+#extraInputs {
+	margin-top: 10px;
+}
+
+.table-container {
+	max-height: 400px;
+	overflow-y: auto;
+	margin-bottom: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	font-size: 15px;
+}
+
+table th,
+table td {
+	border: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+}
+
+table th {
+	background-color: #007bff;
+	color: white;
+}
+
+table tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.button-group {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+	.container {
+		width: 100%;
+		height: auto;
+	}
+	#viewDataBtn {
+		width: 100%;
+	}
+	input[type="text"],
+	button {
+		font-size: 14px;
+		padding: 10px;
+	}
+	h2,
+	h3 {
+		font-size: 18px;
+	}
+	table {
+		font-size: 14px;
+	}
+}
