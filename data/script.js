@@ -140,8 +140,8 @@ function toggleExtraInputsEdit() {
             <div class="form-group">
                 <label for="is_luar">Sensor Bau di Luar</label>
                 <select id="is_luar" name="is_luar" required>
+					<option value="tidak">Tidak</option>
                     <option value="ya">Ya</option>
-                    <option value="tidak">Tidak</option>
                 </select>
             </div>
         `;
